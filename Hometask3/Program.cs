@@ -1,27 +1,52 @@
 ﻿// Задайте массив вещественных чисел. Найдите разницу между максимальным и 
 //минимальным элементов массива.
 //[3.22, 4.2, 1.15, 77.15, 65.2] => 77.15 - 1.15 = 76
-int ReadInt(string message)
- {
-    System.Console.Write(message);
-    int inputedNum = Convert.ToInt32(Console.ReadLine());
-    return inputedNum;
-}
-int[] GetArray(int len, int min, int max)//получение массива случайных чисел
+double[] GetArray()//получение массива случайных чисел
 {
-    int[] array = new int [len];
+    double[] array = new double [5];
     Random random = new Random();
     for (int i = 0;i < array.Length; i ++)
     {
-        array[i] = random.Next(min, max + 1);
+        array[i] = random.Next(0, 100) + random.NextDouble();
     }
     return array;
 }
-void PrintArray(int[] array)
-{
+void PrintArray(double[] array)
+{   
+    System.Console.WriteLine($"Числа в массиве: ");
     for (int i = 0; i < array.Length; i ++)
     {
-    System.Console.Write($"{array[i]}, ");
+    System.Console.Write($"\t {array[i]:f3}  ");
     }
-    System.Console.Write();// Для перевода строки
+    System.Console.WriteLine();// Для перевода строки
 }
+double Max(double[] array)
+{
+    double max = array[0];
+    for (int i = 0; i < array.Length; i ++)
+    {
+        if (max < array[i])
+        {
+            max = array[i];
+        }
+    }
+    return max;
+}
+double Min(double[] array)
+{
+    double min = array[0];
+    for (int i = 0; i < array.Length; i ++)
+    {
+        if (min > array[i])
+        {
+            min = array[i];
+        }
+        
+    }
+    return min; 
+}
+double[] newarray = GetArray();
+PrintArray(newarray);
+double max = Max(newarray);
+double min = Min(newarray);
+System.Console.WriteLine($"Максимальное число: {max:f3} \n Минимальное число: {min:f3} \nРазница между максимальным и минимальным числами равна {max - min:f3}");
